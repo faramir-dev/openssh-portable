@@ -993,6 +993,26 @@ struct winsize {
 # define USE_MLKEM768X25519	1
 #endif
 
+/*
+ * McEliece implementations - enable unconditionally if libmceliece is available
+ * These can be overridden by config.h if configure is used with --with-libmceliece
+ */
+#ifndef USE_MCELIECE348864X25519
+# define USE_MCELIECE348864X25519	1
+#endif
+#ifndef USE_MCELIECE460896X25519
+# define USE_MCELIECE460896X25519	1
+#endif
+#ifndef USE_MCELIECE6688128X25519
+# define USE_MCELIECE6688128X25519	1
+#endif
+#ifndef USE_MCELIECE6960119X25519
+# define USE_MCELIECE6960119X25519	1
+#endif
+#ifndef USE_MCELIECE8192128X25519
+# define USE_MCELIECE8192128X25519	1
+#endif
+
 #if defined(HAVE_DECL_INFINITY) && HAVE_DECL_INFINITY == 0
 # if defined(HAVE_DECL___BUILTIN_INFF) && HAVE_DECL___BUILTIN_INFF == 1
 #  define INFINITY __builtin_inff()

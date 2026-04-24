@@ -291,6 +291,21 @@ keygrab_ssh2(con *c)
 	c->c_ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_SNTRUP761X25519_SHA512] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_MLKEM768X25519_SHA256] = kex_gen_client;
+#ifdef USE_MCELIECE348864X25519
+	c->c_ssh->kex->kex[KEX_KEM_MCELIECE348864X25519_SHA512] = kex_gen_client;
+#endif
+#ifdef USE_MCELIECE460896X25519
+	c->c_ssh->kex->kex[KEX_KEM_MCELIECE460896X25519_SHA512] = kex_gen_client;
+#endif
+#ifdef USE_MCELIECE6688128X25519
+	c->c_ssh->kex->kex[KEX_KEM_MCELIECE6688128X25519_SHA512] = kex_gen_client;
+#endif
+#ifdef USE_MCELIECE6960119X25519
+	c->c_ssh->kex->kex[KEX_KEM_MCELIECE6960119X25519_SHA512] = kex_gen_client;
+#endif
+#ifdef USE_MCELIECE8192128X25519
+	c->c_ssh->kex->kex[KEX_KEM_MCELIECE8192128X25519_SHA512] = kex_gen_client;
+#endif
 	ssh_set_verify_host_key_callback(c->c_ssh, key_print_wrapper);
 	/*
 	 * do the key-exchange until an error occurs or until

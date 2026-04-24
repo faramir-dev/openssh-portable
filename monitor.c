@@ -1895,6 +1895,21 @@ monitor_apply_keystate(struct ssh *ssh, struct monitor *pmonitor)
 	kex->kex[KEX_C25519_SHA256] = kex_gen_server;
 	kex->kex[KEX_KEM_SNTRUP761X25519_SHA512] = kex_gen_server;
 	kex->kex[KEX_KEM_MLKEM768X25519_SHA256] = kex_gen_server;
+#ifdef USE_MCELIECE348864X25519
+	kex->kex[KEX_KEM_MCELIECE348864X25519_SHA512] = kex_gen_server;
+#endif
+#ifdef USE_MCELIECE460896X25519
+	kex->kex[KEX_KEM_MCELIECE460896X25519_SHA512] = kex_gen_server;
+#endif
+#ifdef USE_MCELIECE6688128X25519
+	kex->kex[KEX_KEM_MCELIECE6688128X25519_SHA512] = kex_gen_server;
+#endif
+#ifdef USE_MCELIECE6960119X25519
+	kex->kex[KEX_KEM_MCELIECE6960119X25519_SHA512] = kex_gen_server;
+#endif
+#ifdef USE_MCELIECE8192128X25519
+	kex->kex[KEX_KEM_MCELIECE8192128X25519_SHA512] = kex_gen_server;
+#endif
 	kex->load_host_public_key=&get_hostkey_public_by_type;
 	kex->load_host_private_key=&get_hostkey_private_by_type;
 	kex->host_key_index=&get_hostkey_index;

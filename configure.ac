@@ -3545,6 +3545,50 @@ else
 	AC_SUBST([SK_STANDALONE], [""])
 fi
 
+# Check whether user wants libmceliece support
+LIBMCELIECE_MSG="no"
+AC_ARG_WITH([libmceliece],
+	[  --with-libmceliece[[=PATH]]   Enable libmceliece support.],
+        [],
+        [with_libmceliece=no])
+if test "x$with_libmceliece" != "xno" ; then
+	if test "x$with_libmceliece" != "xyes" ; then
+		CPPFLAGS="$CPPFLAGS -I${with_libmceliece}/include"
+		if test -n "${rpath_opt}"; then
+			LDFLAGS="-L${with_libmceliece}/lib ${rpath_opt}${with_libmceliece}/lib ${LDFLAGS}"
+		else
+			LDFLAGS="-L${with_libmceliece}/lib ${LDFLAGS}"
+		fi
+	fi
+	saved_LIBS="$LIBS"
+	LIBS="-lmceliece $LIBS"
+	AC_MSG_CHECKING([for mceliece_kem_6688128_keypair in -lmceliece])
+	AC_LINK_IFELSE([AC_LANG_PROGRAM([[
+		#include <stdlib.h>
+		void randombytes_internal_void_voidstar_longlong(void *buf, long long len) {
+			/* Stub for configure test */
+		}
+		extern void mceliece_kem_6688128_keypair(unsigned char *, unsigned char *);
+	]], [[
+		mceliece_kem_6688128_keypair(NULL, NULL);
+	]])],
+	[
+		AC_MSG_RESULT([yes])
+		AC_DEFINE([USE_MCELIECE6688128X25519], [1], [Use mceliece6688128])
+		AC_DEFINE([USE_MCELIECE348864X25519], [1], [Use mceliece348864])
+		AC_DEFINE([USE_MCELIECE460896X25519], [1], [Use mceliece460896])
+		AC_DEFINE([USE_MCELIECE6960119X25519], [1], [Use mceliece6960119])
+		AC_DEFINE([USE_MCELIECE8192128X25519], [1], [Use mceliece8192128])
+		LIBMCELIECE_MSG="yes"
+		LIBMCELIECE="-lmceliece"
+		AC_SUBST([LIBMCELIECE])
+	],
+	[
+		AC_MSG_RESULT([no])
+		LIBS="$saved_LIBS"
+	])
+fi
+
 AC_CHECK_FUNCS([ \
 	arc4random \
 	arc4random_buf \
@@ -5957,6 +6001,7 @@ echo "              Random number source: $RAND_MSG"
 echo "             Privsep sandbox style: $SANDBOX_STYLE"
 echo "                   PKCS#11 support: $enable_pkcs11"
 echo "                  U2F/FIDO support: $enable_sk"
+echo "               libmceliece support: $LIBMCELIECE_MSG"
 
 echo ""
 
@@ -5974,6 +6019,9 @@ echo "        +for FIDO2: ${LIBFIDO2}"
 fi
 if test ! -z "${SSHDLIBS}"; then
 echo "         +for sshd: ${SSHDLIBS}"
+fi
+if test ! -z "${LIBMCELIECE}"; then
+echo "     +for mceliece: ${LIBMCELIECE}"
 fi
 
 echo ""

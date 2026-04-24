@@ -1,0 +1,32 @@
+# Exclude Docker-related files
+Dockerfile
+.dockerignore
+
+# Exclude Git files
+.git
+.gitignore
+.gitorderfile
+
+# Exclude Claude-related files
+.claude
+claude.md
+CLAUDE.md
+
+# Exclude build artifacts (if any exist)
+*.o
+*.a
+*.so
+*.so.*
+*.log
+
+# Exclude any existing binaries
+ssh
+sshd
+sshd-session
+sshd-auth
+ssh-keygen
+ssh-agent
+ssh-add
+ssh-keyscan
+scp
+sftp

@@ -28,6 +28,11 @@
 	"mlkem768x25519-sha256," \
 	"sntrup761x25519-sha512," \
 	"sntrup761x25519-sha512@openssh.com," \
+	"mceliece348864x25519-sha512@openssh.com," \
+	"mceliece460896x25519-sha512@openssh.com," \
+	"mceliece6688128x25519-sha512@openssh.com," \
+	"mceliece6960119x25519-sha512@openssh.com," \
+	"mceliece8192128x25519-sha512@openssh.com," \
 	"curve25519-sha256," \
 	"curve25519-sha256@libssh.org," \
 	"ecdh-sha2-nistp256," \

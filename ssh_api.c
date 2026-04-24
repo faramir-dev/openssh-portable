@@ -135,6 +135,21 @@ ssh_init(struct ssh **sshp, int is_server, struct kex_params *kex_params)
 		ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_server;
 		ssh->kex->kex[KEX_KEM_SNTRUP761X25519_SHA512] = kex_gen_server;
 		ssh->kex->kex[KEX_KEM_MLKEM768X25519_SHA256] = kex_gen_server;
+#ifdef USE_MCELIECE348864X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE348864X25519_SHA512] = kex_gen_server;
+#endif
+#ifdef USE_MCELIECE460896X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE460896X25519_SHA512] = kex_gen_server;
+#endif
+#ifdef USE_MCELIECE6688128X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE6688128X25519_SHA512] = kex_gen_server;
+#endif
+#ifdef USE_MCELIECE6960119X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE6960119X25519_SHA512] = kex_gen_server;
+#endif
+#ifdef USE_MCELIECE8192128X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE8192128X25519_SHA512] = kex_gen_server;
+#endif
 		ssh->kex->load_host_public_key=&_ssh_host_public_key;
 		ssh->kex->load_host_private_key=&_ssh_host_private_key;
 		ssh->kex->sign=&_ssh_host_key_sign;
@@ -154,6 +169,21 @@ ssh_init(struct ssh **sshp, int is_server, struct kex_params *kex_params)
 		ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_client;
 		ssh->kex->kex[KEX_KEM_SNTRUP761X25519_SHA512] = kex_gen_client;
 		ssh->kex->kex[KEX_KEM_MLKEM768X25519_SHA256] = kex_gen_client;
+#ifdef USE_MCELIECE348864X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE348864X25519_SHA512] = kex_gen_client;
+#endif
+#ifdef USE_MCELIECE460896X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE460896X25519_SHA512] = kex_gen_client;
+#endif
+#ifdef USE_MCELIECE6688128X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE6688128X25519_SHA512] = kex_gen_client;
+#endif
+#ifdef USE_MCELIECE6960119X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE6960119X25519_SHA512] = kex_gen_client;
+#endif
+#ifdef USE_MCELIECE8192128X25519
+		ssh->kex->kex[KEX_KEM_MCELIECE8192128X25519_SHA512] = kex_gen_client;
+#endif
 		ssh->kex->verify_host_key =&_ssh_verify_host_key;
 	}
 	*sshp = ssh;

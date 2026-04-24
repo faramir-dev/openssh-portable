@@ -65,6 +65,11 @@
 #define	KEX_SNTRUP761X25519_SHA512	"sntrup761x25519-sha512"
 #define	KEX_SNTRUP761X25519_SHA512_OLD	"sntrup761x25519-sha512@openssh.com"
 #define	KEX_MLKEM768X25519_SHA256	"mlkem768x25519-sha256"
+#define	KEX_MCELIECE348864X25519_SHA512		"mceliece348864x25519-sha512@openssh.com"
+#define	KEX_MCELIECE460896X25519_SHA512		"mceliece460896x25519-sha512@openssh.com"
+#define	KEX_MCELIECE6688128X25519_SHA512	"mceliece6688128x25519-sha512@openssh.com"
+#define	KEX_MCELIECE6960119X25519_SHA512	"mceliece6960119x25519-sha512@openssh.com"
+#define	KEX_MCELIECE8192128X25519_SHA512	"mceliece8192128x25519-sha512@openssh.com"
 
 #define COMP_NONE	0
 #define COMP_DELAYED	2
@@ -103,6 +108,11 @@ enum kex_exchange {
 	KEX_C25519_SHA256,
 	KEX_KEM_SNTRUP761X25519_SHA512,
 	KEX_KEM_MLKEM768X25519_SHA256,
+	KEX_KEM_MCELIECE348864X25519_SHA512,
+	KEX_KEM_MCELIECE460896X25519_SHA512,
+	KEX_KEM_MCELIECE6688128X25519_SHA512,
+	KEX_KEM_MCELIECE6960119X25519_SHA512,
+	KEX_KEM_MCELIECE8192128X25519_SHA512,
 	KEX_MAX
 };
 
@@ -187,6 +197,21 @@ struct kex {
 	u_char c25519_client_pubkey[CURVE25519_SIZE]; /* 25519 */
 	u_char sntrup761_client_key[crypto_kem_sntrup761_SECRETKEYBYTES]; /* KEM */
 	u_char mlkem768_client_key[crypto_kem_mlkem768_SECRETKEYBYTES]; /* KEM */
+#ifdef USE_MCELIECE348864X25519
+	u_char mceliece348864_client_key[crypto_kem_mceliece348864_SECRETKEYBYTES];
+#endif
+#ifdef USE_MCELIECE460896X25519
+	u_char mceliece460896_client_key[crypto_kem_mceliece460896_SECRETKEYBYTES];
+#endif
+#ifdef USE_MCELIECE6688128X25519
+	u_char mceliece6688128_client_key[crypto_kem_mceliece6688128_SECRETKEYBYTES];
+#endif
+#ifdef USE_MCELIECE6960119X25519
+	u_char mceliece6960119_client_key[crypto_kem_mceliece6960119_SECRETKEYBYTES];
+#endif
+#ifdef USE_MCELIECE8192128X25519
+	u_char mceliece8192128_client_key[crypto_kem_mceliece8192128_SECRETKEYBYTES];
+#endif
 	struct sshbuf *client_pub;
 };
 
@@ -258,6 +283,36 @@ int	 kex_kem_mlkem768x25519_keypair(struct kex *);
 int	 kex_kem_mlkem768x25519_enc(struct kex *, const struct sshbuf *,
     struct sshbuf **, struct sshbuf **);
 int	 kex_kem_mlkem768x25519_dec(struct kex *, const struct sshbuf *,
+    struct sshbuf **);
+
+int	 kex_kem_mceliece348864x25519_keypair(struct kex *);
+int	 kex_kem_mceliece348864x25519_enc(struct kex *, const struct sshbuf *,
+    struct sshbuf **, struct sshbuf **);
+int	 kex_kem_mceliece348864x25519_dec(struct kex *, const struct sshbuf *,
+    struct sshbuf **);
+
+int	 kex_kem_mceliece460896x25519_keypair(struct kex *);
+int	 kex_kem_mceliece460896x25519_enc(struct kex *, const struct sshbuf *,
+    struct sshbuf **, struct sshbuf **);
+int	 kex_kem_mceliece460896x25519_dec(struct kex *, const struct sshbuf *,
+    struct sshbuf **);
+
+int	 kex_kem_mceliece6688128x25519_keypair(struct kex *);
+int	 kex_kem_mceliece6688128x25519_enc(struct kex *, const struct sshbuf *,
+    struct sshbuf **, struct sshbuf **);
+int	 kex_kem_mceliece6688128x25519_dec(struct kex *, const struct sshbuf *,
+    struct sshbuf **);
+
+int	 kex_kem_mceliece6960119x25519_keypair(struct kex *);
+int	 kex_kem_mceliece6960119x25519_enc(struct kex *, const struct sshbuf *,
+    struct sshbuf **, struct sshbuf **);
+int	 kex_kem_mceliece6960119x25519_dec(struct kex *, const struct sshbuf *,
+    struct sshbuf **);
+
+int	 kex_kem_mceliece8192128x25519_keypair(struct kex *);
+int	 kex_kem_mceliece8192128x25519_enc(struct kex *, const struct sshbuf *,
+    struct sshbuf **, struct sshbuf **);
+int	 kex_kem_mceliece8192128x25519_dec(struct kex *, const struct sshbuf *,
     struct sshbuf **);
 
 int	 kex_dh_keygen(struct kex *);

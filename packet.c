@@ -96,7 +96,8 @@
 #define DBG(x)
 #endif
 
-#define PACKET_MAX_SIZE (256 * 1024)
+/* Increased to 2MB to accommodate large post-quantum keys (McEliece) */
+#define PACKET_MAX_SIZE (2 * 1024 * 1024)
 
 struct packet_state {
 	uint32_t seqnr;
