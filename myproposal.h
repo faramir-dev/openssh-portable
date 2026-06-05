@@ -66,9 +66,7 @@
 	"rsa-sha2-256"
 
 #define	KEX_SERVER_ENCRYPT \
-	"chacha20-poly1305@openssh.com," \
-	"aes128-gcm@openssh.com,aes256-gcm@openssh.com," \
-	"aes128-ctr,aes192-ctr,aes256-ctr"
+	"chacha20-poly1305@openssh.com"
 
 #define KEX_CLIENT_ENCRYPT KEX_SERVER_ENCRYPT
 
