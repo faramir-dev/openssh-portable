@@ -288,24 +288,24 @@ out:
 	explicit_bzero(kex->mlkem768_client_key,
 	    sizeof(kex->mlkem768_client_key));
 #ifdef USE_MCELIECE348864X25519
-	explicit_bzero(kex->mceliece348864_client_key,
-	    sizeof(kex->mceliece348864_client_key));
+	explicit_bzero(kex->mceliece_client_key,
+	    sizeof(kex->mceliece_client_key));
 #endif
 #ifdef USE_MCELIECE460896X25519
-	explicit_bzero(kex->mceliece460896_client_key,
-	    sizeof(kex->mceliece460896_client_key));
+	explicit_bzero(kex->mceliece_client_key,
+	    sizeof(kex->mceliece_client_key));
 #endif
 #ifdef USE_MCELIECE6688128X25519
-	explicit_bzero(kex->mceliece6688128_client_key,
-	    sizeof(kex->mceliece6688128_client_key));
+	explicit_bzero(kex->mceliece_client_key,
+	    sizeof(kex->mceliece_client_key));
 #endif
 #ifdef USE_MCELIECE6960119X25519
-	explicit_bzero(kex->mceliece6960119_client_key,
-	    sizeof(kex->mceliece6960119_client_key));
+	explicit_bzero(kex->mceliece_client_key,
+	    sizeof(kex->mceliece_client_key));
 #endif
 #ifdef USE_MCELIECE8192128X25519
-	explicit_bzero(kex->mceliece8192128_client_key,
-	    sizeof(kex->mceliece8192128_client_key));
+	explicit_bzero(kex->mceliece_client_key,
+	    sizeof(kex->mceliece_client_key));
 #endif
 	sshbuf_free(server_host_key_blob);
 	free(signature);
