@@ -57,7 +57,7 @@ kex_kem_mceliece6688128x25519_keypair(struct kex *kex)
 	need = crypto_kem_mceliece6688128_PUBLICKEYBYTES + CURVE25519_SIZE;
 	if ((r = sshbuf_reserve(buf, need, &cp)) != 0)
 		goto out;
-	crypto_kem_mceliece6688128_keypair(cp, kex->mceliece6688128_client_key);
+	crypto_kem_mceliece6688128_keypair(cp, kex->mceliece_client_key);
 #ifdef DEBUG_KEXECDH
 	dump_digest("client public key mceliece6688128:", cp,
 	    crypto_kem_mceliece6688128_PUBLICKEYBYTES);
@@ -199,7 +199,7 @@ kex_kem_mceliece6688128x25519_dec(struct kex *kex,
 	    &kem_key)) != 0)
 		goto out;
 	decoded = crypto_kem_mceliece6688128_dec(kem_key, ciphertext,
-	    kex->mceliece6688128_client_key);
+	    kex->mceliece_client_key);
 	if ((r = kexc25519_shared_key_ext(kex->c25519_client_key, server_pub,
 	    buf, 1)) < 0)
 		goto out;

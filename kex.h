@@ -50,6 +50,9 @@
 
 #define KEX_COOKIE_LEN	16
 
+/* Maximum McEliece secret key size (mceliece8192128) */
+#define MCELIECE_MAX_SECRETKEYBYTES	14120
+
 #define	KEX_DH1				"diffie-hellman-group1-sha1"
 #define	KEX_DH14_SHA1			"diffie-hellman-group14-sha1"
 #define	KEX_DH14_SHA256			"diffie-hellman-group14-sha256"
@@ -197,20 +200,10 @@ struct kex {
 	u_char c25519_client_pubkey[CURVE25519_SIZE]; /* 25519 */
 	u_char sntrup761_client_key[crypto_kem_sntrup761_SECRETKEYBYTES]; /* KEM */
 	u_char mlkem768_client_key[crypto_kem_mlkem768_SECRETKEYBYTES]; /* KEM */
-#ifdef USE_MCELIECE348864X25519
-	u_char mceliece348864_client_key[crypto_kem_mceliece348864_SECRETKEYBYTES];
-#endif
-#ifdef USE_MCELIECE460896X25519
-	u_char mceliece460896_client_key[crypto_kem_mceliece460896_SECRETKEYBYTES];
-#endif
-#ifdef USE_MCELIECE6688128X25519
-	u_char mceliece6688128_client_key[crypto_kem_mceliece6688128_SECRETKEYBYTES];
-#endif
-#ifdef USE_MCELIECE6960119X25519
-	u_char mceliece6960119_client_key[crypto_kem_mceliece6960119_SECRETKEYBYTES];
-#endif
-#ifdef USE_MCELIECE8192128X25519
-	u_char mceliece8192128_client_key[crypto_kem_mceliece8192128_SECRETKEYBYTES];
+#if defined(USE_MCELIECE348864X25519) || defined(USE_MCELIECE460896X25519) || \
+    defined(USE_MCELIECE6688128X25519) || defined(USE_MCELIECE6960119X25519) || \
+    defined(USE_MCELIECE8192128X25519)
+	u_char mceliece_client_key[MCELIECE_MAX_SECRETKEYBYTES]; /* KEM */
 #endif
 	struct sshbuf *client_pub;
 };
